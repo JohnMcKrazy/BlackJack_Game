@@ -464,7 +464,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "spades",
                 icon: "K",
                 value: 10,
-                img: "./img/deck/spades_king.png",
+                img: "./img/deck/spades_King.png",
             },
             {
                 player: "Player",
@@ -986,7 +986,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "diamonds",
                 icon: "A",
                 value: 1,
-                img: "./img/deck/diamons_Ace_House.png",
+                img: "./img/deck/diamonds_Ace_House.png",
             },
             {
                 player: "House",
@@ -994,7 +994,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "diamonds",
                 icon: 2,
                 value: 2,
-                img: "./img/deck/diamons_2_House.png",
+                img: "./img/deck/diamonds_2_House.png",
             },
             {
                 player: "House",
@@ -1002,7 +1002,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "diamonds",
                 icon: 3,
                 value: 3,
-                img: "./img/deck/diamons_3_House.png",
+                img: "./img/deck/diamonds_3_House.png",
             },
             {
                 player: "House",
@@ -1010,7 +1010,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "diamonds",
                 icon: 4,
                 value: 4,
-                img: "./img/deck/diamons_4_House.png",
+                img: "./img/deck/diamonds_4_House.png",
             },
             {
                 player: "House",
@@ -1018,7 +1018,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "diamonds",
                 icon: 5,
                 value: 5,
-                img: "./img/deck/diamons_5_House.png",
+                img: "./img/deck/diamonds_5_House.png",
             },
             {
                 player: "House",
@@ -1026,7 +1026,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "diamonds",
                 icon: 6,
                 value: 6,
-                img: "./img/deck/diamons_6_House.png",
+                img: "./img/deck/diamonds_6_House.png",
             },
             {
                 player: "House",
@@ -1034,7 +1034,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "diamonds",
                 icon: 7,
                 value: 7,
-                img: "./img/deck/diamons_7_House.png",
+                img: "./img/deck/diamonds_7_House.png",
             },
             {
                 player: "House",
@@ -1042,7 +1042,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "diamonds",
                 icon: 8,
                 value: 8,
-                img: "./img/deck/diamons_8_House.png",
+                img: "./img/deck/diamonds_8_House.png",
             },
             {
                 player: "House",
@@ -1050,7 +1050,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "diamonds",
                 icon: 9,
                 value: 9,
-                img: "./img/deck/diamons_9_House.png",
+                img: "./img/deck/diamonds_9_House.png",
             },
             {
                 player: "House",
@@ -1058,7 +1058,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "diamonds",
                 icon: 10,
                 value: 10,
-                img: "./img/deck/diamons_10_House.png",
+                img: "./img/deck/diamonds_10_House.png",
             },
             {
                 player: "House",
@@ -1066,7 +1066,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "diamonds",
                 icon: "J",
                 value: 10,
-                img: "./img/deck/diamons_Jack_House.png",
+                img: "./img/deck/diamonds_Jack_House.png",
             },
             {
                 player: "House",
@@ -1074,7 +1074,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "diamonds",
                 icon: "Q",
                 value: 10,
-                img: "./img/deck/diamons_Queen_House.png",
+                img: "./img/deck/diamonds_Queen_House.png",
             },
             {
                 player: "House",
@@ -1082,7 +1082,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "diamonds",
                 icon: "K",
                 value: 10,
-                img: "./img/deck/diamons_King_House.png",
+                img: "./img/deck/diamonds_King_House.png",
             },
             {
                 player: "House",
