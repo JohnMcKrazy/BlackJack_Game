@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         alertWhoStartBtnsContainer.classList.add("hide");
         alertText.textContent = "Looking for a player";
         console.log("The computer it's serching");
-        const playersInTheGame = ["Player 1", "The House"];
+        const playersInTheGame = ["Player", "The House"];
         const playersInTheGameRandomLengthNumber = playersInTheGame.length * Math.random();
         const playersInTheGameRandomNumber = Math.floor(playersInTheGameRandomLengthNumber);
         const playersInTheGameRandomPlayer = playersInTheGame[playersInTheGameRandomNumber];
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             alertText.textContent = playersInTheGameRandomPlayer + " start the game";
             function whoStartPlay() {
-                if (playersInTheGameRandomPlayer === "Player 1") {
+                if (playersInTheGameRandomPlayer === "Player") {
                     playerStatus = "Playing";
                     houseStatus = "Waiting";
                     setTimeout(changeToPlayer, 2000);

@@ -28,18 +28,20 @@
   --green: green;
   --darkGreen: rgb(10, 80, 10);
   --turquoise: turquoise;
-  font-size: 8px;
+  font-size: 12px;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-weight: 400;
+  font-weight: 600;
   font-family: "Lato", sans-serif;
+  letter-spacing: 0.1rem;
 }
 
 body {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,8 +54,46 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
-body BUTTON {
+
+BUTTON {
   border: none;
+  background: var(--white);
+  text-align: center;
+}
+
+.my_banner {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+  background: var(--whiteT);
+  color: var(--black);
+  border-radius: 2rem;
+  font-size: 1.2rem;
+  width: 90%;
+}
+
+.link_btn {
+  background: var(--purple);
+  color: var(--white);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.link_btn:visited,
+.link_btn:focus,
+.link_btn:active {
+  color: var(--white);
 }
 
 .board_game_container {
@@ -123,6 +163,7 @@ body BUTTON {
 }
 .games_count_container .count_title {
   color: var(--white);
+  font-weight: 400;
 }
 
 .player_count_container {
@@ -154,6 +195,7 @@ body BUTTON {
   margin-top: 0.25rem;
   color: var(--white);
   font-size: 1rem;
+  font-weight: 400;
 }
 
 .display_alert {
@@ -250,9 +292,6 @@ body BUTTON {
   text-transform: uppercase;
   z-index: 2;
 }
-.waiting_block p {
-  font-weight: 600;
-}
 
 .btns_container {
   display: flex;
@@ -273,27 +312,34 @@ body BUTTON {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  text-transform: uppercase;
-  color: var(--black);
-  font-size: 1.2rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
   width: 100%;
 }
+.display_btn .label_btn {
+  text-transform: uppercase;
+  color: var(--black);
+  font-size: 1.2rem;
+}
 
 .red_btn:hover {
   background: var(--red);
+}
+.red_btn:hover .label_btn {
   color: var(--white);
 }
 
 .purple_btn:hover {
   background: var(--purple);
+}
+.purple_btn:hover .label_btn {
   color: var(--white);
 }
 
 .blue_btn:hover {
   background: var(--blue);
+}
+.blue_btn:hover .label_btn {
   color: var(--white);
 }
 
