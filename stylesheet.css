@@ -1,10 +1,13 @@
 :root {
+  --logoBlue: rgb(66, 196, 240);
+  --logoPurple: rgb(46, 10, 117);
+  --losgoGrey: rgb(166, 166, 166);
   --board: darkslategray;
   --black: black;
   --blackMute: rgb(35, 35, 35);
   --blackT: rgb(0, 0, 0, 0.5);
   --white: rgb(245, 245, 245);
-  --whiteT: rgb(245, 245, 245, 0.5);
+  --whiteT: rgb(245, 245, 245, 0.7);
   --darkShadow: rgba(0, 0, 0, 0.8);
   --lightShadow: rgba(100, 100, 100, 0.8);
   --gray: dimgray;
@@ -31,7 +34,10 @@
   font-size: 12px;
 }
 
-* {
+*,
+*:after,
+*:before,
+* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -40,15 +46,15 @@
   letter-spacing: 0.1rem;
 }
 
-body {
+BODY {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   min-height: 100svh;
   width: 100%;
-  padding: 2rem;
+  padding: 6rem 2rem 2rem;
   background: url("./img/wood.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -62,63 +68,85 @@ BUTTON {
 }
 
 .my_banner {
-  position: absolute;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
-  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 4rem;
   background: var(--whiteT);
   color: var(--black);
-  border-radius: 2rem;
   font-size: 1.2rem;
-  width: 90%;
+  width: 100%;
+  z-index: 10;
 }
-
-.link_btn {
-  background: var(--purple);
-  color: var(--white);
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 1rem;
+.my_banner .content {
+  margin: 0 auto;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  gap: 4rem;
+}
+
+.link_btn {
+  display: inline-block;
+  background: none;
+  color: var(--red);
+  text-decoration: none;
 }
 
 .link_btn:visited,
 .link_btn:focus,
 .link_btn:active {
-  color: var(--white);
+  color: var(--red);
+}
+
+.logo_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 3rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: var(--white);
+}
+.logo_btn SVG {
+  height: 100%;
+  width: auto;
+}
+.logo_btn .cls-1 {
+  fill: var(--logoBlue);
+}
+.logo_btn .cls-2 {
+  fill: var(--logoPurple);
+}
+.logo_btn .cls-3 {
+  fill: var(--losgoGrey);
 }
 
 .board_game_container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 90%;
-  max-width: 800px;
+  align-items: center;
+  width: 95%;
+  max-width: 1000px;
   height: 100%;
-  background: var(--lightGray);
-  border-radius: 0.5rem;
-  transition: all 0.5s ease-in-out;
-  padding: 1rem;
-  gap: 1rem;
 }
 
 .game_title {
   display: block;
   font-size: 2.5rem;
   width: 100%;
-  border-radius: 0.25rem;
-  background: var(--white);
+  border-radius: 0.5rem 0.5rem 0 0;
+  background: var(--blackMute);
   text-align: center;
   text-transform: uppercase;
+  padding: 0.5rem 0;
+  color: var(--white);
 }
 .game_title .red_text_title {
   color: var(--red);
@@ -134,7 +162,6 @@ BUTTON {
   background: var(--board);
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 0.5rem;
   padding: 1rem;
   transition: all 0.5s ease-in-out;
 }
@@ -182,7 +209,7 @@ BUTTON {
   height: 100%;
 }
 .playerBoard .card_display {
-  max-width: 120px;
+  max-width: 100px;
   width: 100%;
   height: auto;
   -o-object-fit: cover;
@@ -230,26 +257,31 @@ BUTTON {
   margin-top: 10px;
 }
 
-.container {
+.card {
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 0.5rem;
-  background: var(--whiteT);
   text-align: center;
   font-size: 1rem;
-  padding: 0.25rem;
-  transition: all 0.5s ease-in-out;
+  padding: 0.25rem 0.5rem;
 }
-.container H4 {
+.card .title {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.card .score {
+  font-size: 2rem;
+}
 
-.score-container {
+.given_container {
+  background: var(--whiteT);
+}
+
+.score_container {
   background: var(--redT);
-  transition: all 0.5s ease-in-out;
+  color: var(--white);
 }
 
 .card_score {
@@ -269,30 +301,29 @@ BUTTON {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem;
+  border-radius: 0 0 0.5rem 0.5rem;
   background: var(--blackMute);
   width: 100%;
   padding: 0.5rem;
   overflow: hidden;
 }
 
-.waiting_block {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background: var(--black);
-  color: var(--white);
-  font-size: 2rem;
-  text-transform: uppercase;
-  z-index: 2;
-}
-
+/* .waiting_block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: var(--black);
+    color: var(--white);
+    font-size: 2rem;
+    text-transform: uppercase;
+    z-index: 2;
+} */
 .btns_container {
   display: flex;
   align-items: center;
