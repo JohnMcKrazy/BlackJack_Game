@@ -9,13 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const houseCardGameName = document.querySelector("#house_card_game_name");
     const playerWinScoreId = document.querySelector("#player_win_score_id");
     const playerLostScoreId = document.querySelector("#player_lost_score_id");
-    const outlineContainer = document.querySelector("#outline_countainer_id");
-    const playerTurnCount = document.querySelector("#player_turn_count");
-    const houseTurnCount = document.querySelector("#house_turn_count");
     const giveMeBtnsContainer = document.querySelector("#alert_giveMe_done_btns_container");
     const giveMeBtn = document.querySelector("#display_giveMe_btn");
     const doneBtn = document.querySelector("#display_done_btn");
     const displayAlert = document.querySelector("#display_alert_id");
+    const waitingBlock = document.querySelector(".waiting_block");
     const alertText = document.querySelector("#alert_text_id");
     const alertNewGameBtnsContainer = document.querySelector("#alert_newGame_btns_container");
     const alertNewGameBtn = document.querySelector("#display_newGame_btn");
@@ -44,9 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function startGame() {
         //?quita el contenedor del boton de start
-        startBtnContainer.classList.add("hide_btns");
+        startBtnContainer.classList.add("hide");
         //?despliega el contenedor de los botones de who start
-        alertWhoStartBtnsContainer.classList.remove("hide_btns");
+        alertWhoStartBtnsContainer.classList.remove("hide");
         //?cambia el mensaje en el display alert
         alertText.textContent = "Who start?";
         //?regresa las acciones de los botones de who start
@@ -58,12 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
         houseStillPlay = true;
         playerStatus = "Waiting";
         houseStatus = "Waiting";
-        playerTurn = 0;
-        houseTurn = 0;
         sumOfPlayerCards = 0;
         sumOfHouseCards = 0;
-        playerTurnCount.textContent = playerTurn;
-        houseTurnCount.textContent = houseTurn;
 
         playerCardGive.textContent = 0;
         playerCardScore.textContent = sumOfPlayerCards;
@@ -76,23 +70,17 @@ document.addEventListener("DOMContentLoaded", () => {
         cardHouseDisplay.setAttribute("src", "https://imagizer.imageshack.com/img924/2739/vZg8y2.png");
     }
     function giveMeRandom() {
-        alertWhoStartBtnsContainer.classList.add("hide_btns");
+        alertWhoStartBtnsContainer.classList.add("hide");
         alertText.textContent = "Looking for a player";
         console.log("The computer it's serching");
         const playersInTheGame = ["Player 1", "The House"];
         const playersInTheGameRandomLengthNumber = playersInTheGame.length * Math.random();
         const playersInTheGameRandomNumber = Math.floor(playersInTheGameRandomLengthNumber);
         const playersInTheGameRandomPlayer = playersInTheGame[playersInTheGameRandomNumber];
-        function showMeWhoPlay() {
+
+        setTimeout(() => {
             console.log(playersInTheGameRandomPlayer);
 
-            if (playersInTheGameRandomPlayer === "Player 1") {
-                displayAlert.style.background = "var(--blue)";
-                alertText.style.color = "var(--white)";
-            } else if (playersInTheGameRandomPlayer === "The House") {
-                displayAlert.style.background = "var(--purple)";
-                alertText.style.color = "var(--white)";
-            }
             alertText.textContent = playersInTheGameRandomPlayer + " start the game";
             function whoStartPlay() {
                 if (playersInTheGameRandomPlayer === "Player 1") {
@@ -107,36 +95,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             setTimeout(whoStartPlay, 2000);
-        }
-        setTimeout(showMeWhoPlay, 3000);
+        }, 2000);
     }
     function startPlayerBtnFunction() {
-        displayAlert.style.background = "var(--blue)";
-        alertText.style.color = "var(--white)";
         alertText.textContent = "It's your turn, play wisely";
         whoStartBtnsOut();
-        console.log("I'm starting my turn");
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        setTimeout(playerTurnStart, 4000);
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        setTimeout(playerTurnStart, 2000);
     }
     function startHouseBtnFunction() {
-        alertWhoStartBtnsContainer.classList.add("hide_btns");
-        displayAlert.style.background = "var(--purple)";
-        alertText.style.color = "var(--white)";
+        alertWhoStartBtnsContainer.classList.add("hide");
         alertText.textContent = "The house it's making his move";
         whoStartBtnsOut();
-        console.log("The house it's playing");
-        setTimeout(houseTurnStart, 4000);
+        setTimeout(houseTurnStart, 2000);
     }
     function startRandomBtnFunction() {
         whoStartBtnsOut();
         giveMeRandom();
     }
     function playerTurnStart() {
-        alertAceBtnsContainer.classList.add("hide_btns");
-        alertWhoStartBtnsContainer.classList.add("hide_btns");
-        giveMeBtnsContainer.classList.remove("hide_btns");
+        alertAceBtnsContainer.classList.add("hide");
+        alertWhoStartBtnsContainer.classList.add("hide");
+        giveMeBtnsContainer.classList.remove("hide");
 
         displayAlertOut();
         playerBtnsIn();
@@ -145,14 +124,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     function houseTurnStart() {
         displayAlertOut();
-        alertWhoStartBtnsContainer.classList.add("hide_btns");
-        giveMeBtnsContainer.classList.add("hide_btns");
+        alertWhoStartBtnsContainer.classList.add("hide");
+        giveMeBtnsContainer.classList.add("hide");
 
         playerBtnsOut();
 
         console.log("It's the house turn");
 
-        setTimeout(houseTakeACard, 4000);
+        setTimeout(houseTakeACard, 2000);
     }
     function playerBtnsOut() {
         giveMeBtn.removeEventListener("click", playerTakeACard);
@@ -178,36 +157,33 @@ document.addEventListener("DOMContentLoaded", () => {
         startRandomBtn.addEventListener("click", startRandomBtnFunction);
     }
     function aceBtnOne() {
-        alertAceBtnsContainer.classList.add("hide_btns");
+        alertAceBtnsContainer.classList.add("hide");
         playerStatus = "Turn over";
         currentValue = 1;
         sumOfPlayerCards += currentValue;
         playerCardScore.textContent = sumOfPlayerCards;
         console.log(" Turn " + playerTurn + ", sum " + sumOfPlayerCards + "The player take a " + currentValue);
         displayAlertIn();
-        displayAlert.style.background = "var(--purple)";
-        alertText.style.color = "var(--white)";
         alertText.textContent = "It's the house turn";
 
         if (sumOfPlayerCards < 21) {
-            setTimeout(changeToHouse, 4000);
+            setTimeout(changeToHouse, 2000);
         } else {
             finalPlayerCheckPoint();
         }
     }
     function aceBtnEleven() {
-        alertAceBtnsContainer.classList.add("hide_btns");
+        alertAceBtnsContainer.classList.add("hide");
         playerStatus = "Turn over";
         currentValue = 11;
         sumOfPlayerCards += currentValue;
         playerCardScore.textContent = sumOfPlayerCards;
         displayAlertIn();
-        displayAlert.style.background = "var(--purple)";
-        alertText.style.color = "var(--white)";
+
         alertText.textContent = "It's the house turn";
 
         if (sumOfPlayerCards < 21) {
-            setTimeout(changeToHouse, 4000);
+            setTimeout(changeToHouse, 2000);
         } else {
             finalPlayerCheckPoint();
         }
@@ -217,45 +193,36 @@ document.addEventListener("DOMContentLoaded", () => {
             playerStatus = "Turn Over";
             houseStatus = "Waiting";
             displayAlertIn();
-            displayAlert.style.background = "var(--purple)";
-            alertText.style.color = "var(--white)";
-            alertText.textContent = "It's the house turn";
-            setTimeout(changeToHouse, 4000);
+
+            setTimeout(changeToHouse, 2000);
         } else if (sumOfPlayerCards === 21 && playerTurn === 2) {
             playerStatus = "Winer";
             houseStatus = "Loser";
             displayAlertIn();
-            alertAceBtnsContainer.classList.add("hide_btns");
-            giveMeBtnsContainer.classList.add("hide_btns");
-            alertNewGameBtnsContainer.classList.remove("hide_btns");
-            displayAlert.style.background = "var(--turquoise)";
-            alertText.style.color = "var(--white)";
+            alertAceBtnsContainer.classList.add("hide");
+            giveMeBtnsContainer.classList.add("hide");
+            alertNewGameBtnsContainer.classList.remove("hide");
             alertText.textContent = "you got blackjack, you win";
         } else if (sumOfPlayerCards === 21 && playerTurn !== 2) {
             playerStatus = "Winer";
-            HouseStatus = "Loser";
+            houseStatus = "Loser";
             displayAlertIn();
-            alertAceBtnsContainer.classList.add("hide_btns");
-            giveMeBtnsContainer.classList.add("hide_btns");
-            alertNewGameBtnsContainer.classList.remove("hide_btns");
-            displayAlert.style.background = "var(--green)";
-            alertText.style.color = "var(--white)";
+            alertAceBtnsContainer.classList.add("hide");
+            giveMeBtnsContainer.classList.add("hide");
+            alertNewGameBtnsContainer.classList.remove("hide");
             alertText.textContent = "You got 21, you win";
         } else if (sumOfPlayerCards > 21) {
             playerStatus = "Loser";
             displayAlertIn();
-            alertAceBtnsContainer.classList.add("hide_btns");
-            giveMeBtnsContainer.classList.add("hide_btns");
-            alertNewGameBtnsContainer.classList.remove("hide_btns");
-            displayAlert.style.background = "var(--red)";
-            alertText.style.color = "var(--white";
-            alertText.textContent = "your a loser";
+            alertAceBtnsContainer.classList.add("hide");
+            giveMeBtnsContainer.classList.add("hide");
+            alertNewGameBtnsContainer.classList.remove("hide");
+            alertText.textContent = "you lost";
         }
     }
     function playerTakeACard() {
-        giveMeBtnsContainer.classList.add("hide_btns");
+        giveMeBtnsContainer.classList.add("hide");
         playerTurn++;
-        playerTurnCount.textContent = playerTurn;
 
         const playerDeckArray = [
             {
@@ -694,13 +661,11 @@ document.addEventListener("DOMContentLoaded", () => {
         //*formula que distingue los aces de las demas cartas
         if (playerRandomCardArrayValue === 1) {
             displayAlertIn();
-            displayAlert.style.background = "var(--turquoise)";
-            alertText.style.color = "var(--white)";
             alertText.textContent = "you got an " + playerRandomCardArrayName + " how many poits you want?";
-            giveMeBtnsContainer.classList.add("hide_btns");
-            alertWhoStartBtnsContainer.classList.add("hide_btns");
-            alertNewGameBtnsContainer.classList.add("hide_btns");
-            alertAceBtnsContainer.classList.remove("hide_btns");
+            giveMeBtnsContainer.classList.add("hide");
+            alertWhoStartBtnsContainer.classList.add("hide");
+            alertNewGameBtnsContainer.classList.add("hide");
+            alertAceBtnsContainer.classList.remove("hide");
         } else {
             sumOfPlayerCards += playerRandomCardArrayValue;
             playerCardScore.textContent = sumOfPlayerCards;
@@ -714,35 +679,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log(playerStatus);
                 console.log("Turn " + playerTurn + ",Sum " + sumOfPlayerCards + ", you take an a " + playerRandomCardArrayName);
                 displayAlertIn();
-                displayAlert.style.background = "var(--purple)";
-                alertText.style.color = "var(--white)";
                 alertText.textContent = "It's the house turn";
 
-                setTimeout(changeToHouse, 4000);
+                setTimeout(changeToHouse, 2000);
             } else if (sumOfPlayerCards === 21 && playerTurn === 2) {
                 playerStatus = "Winer";
-                HouseStatus = "Loser";
+                houseStatus = "Loser";
                 displayAlertIn();
-                alertAceBtnsContainer.classList.add("hide_btns");
-                giveMeBtnsContainer.classList.add("hide_btns");
-                alertNewGameBtnsContainer.classList.remove("hide_btns");
-                displayAlert.style.background = "var(--turquoise)";
-
-                alertText.style.color = "var(--black)";
-
+                alertAceBtnsContainer.classList.add("hide");
+                giveMeBtnsContainer.classList.add("hide");
+                alertNewGameBtnsContainer.classList.remove("hide");
                 alertText.textContent = "you got blackjack,you win";
             } else if (sumOfPlayerCards === 21 && playerTurn !== 2) {
                 playerStatus = "Winer";
-                HouseStatus = "Loser";
+                houseStatus = "Loser";
                 displayAlertIn();
 
-                alertAceBtnsContainer.classList.add("hide_btns");
-                giveMeBtnsContainer.classList.add("hide_btns");
-                alertNewGameBtnsContainer.classList.remove("hide_btns");
-                displayAlert.style.background = "var(--green)";
-
-                alertText.style.color = "var(--white)";
-
+                alertAceBtnsContainer.classList.add("hide");
+                giveMeBtnsContainer.classList.add("hide");
+                alertNewGameBtnsContainer.classList.remove("hide");
                 alertText.textContent = "You got 21, you win";
 
                 console.log(houseStillPlay);
@@ -754,23 +709,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 playerStatus = "Loser";
                 displayAlertIn();
 
-                alertAceBtnsContainer.classList.add("hide_btns");
-                giveMeBtnsContainer.classList.add("hide_btns");
-                alertNewGameBtnsContainer.classList.remove("hide_btns");
-
-                displayAlert.style.background = "var(--red)";
-                alertText.style.color = "var(--white";
-                alertText.textContent = "your a loser";
+                alertAceBtnsContainer.classList.add("hide");
+                giveMeBtnsContainer.classList.add("hide");
+                alertNewGameBtnsContainer.classList.remove("hide");
+                alertText.textContent = "you lost";
                 console.log(playerStatus);
-                console.log("Your a loser, you take to much cards");
+                console.log("you lost, you take to much cards");
             }
         }
     }
     function houseTakeACard() {
         displayAlertOut();
         houseTurn++;
-        houseTurnCount.textContent = houseTurn;
-
         const houseDeckArray = [
             {
                 player: "House",
@@ -1238,25 +1188,21 @@ document.addEventListener("DOMContentLoaded", () => {
             //?QUITA EL CONTENEDOR DE BOTONES DE JUGADORES
             //TODO             CONTENEDORES DE BOTONES
             //?Quita el contenedor de botones giveMeDone
-            giveMeBtnsContainer.classList.add("hide_btns");
+            giveMeBtnsContainer.classList.add("hide");
             //*
             //?Quita el contenedor de botones whoStart
-            alertWhoStartBtnsContainer.classList.add("hide_btns");
+            alertWhoStartBtnsContainer.classList.add("hide");
             //*
 
             //?Quita el contenedor de botones de Ace
-            alertAceBtnsContainer.classList.add("hide_btns");
+            alertAceBtnsContainer.classList.add("hide");
             //*
 
             //?Quita el contenedor de botones de newGame
-            alertNewGameBtnsContainer.classList.add("hide_btns");
+            alertNewGameBtnsContainer.classList.add("hide");
             //*
             //?Despliega la pantalla de alerta
             displayAlertIn();
-
-            //?Le de careacteristicas de Display Ace - colores
-            displayAlert.style.background = "var(--turquoise)";
-            alertText.style.color = "var(--white)";
 
             //?escribe texto con caracteristicas de carta y mensaje de la casa sobre cuanto valdra
             alertText.textContent = "The house got an " + houseRandomCardArrayName + " and want " + aceCardValuesRandomValue + pointOrPoints();
@@ -1264,8 +1210,8 @@ document.addEventListener("DOMContentLoaded", () => {
             houseCardGive.textContent = houseRandomCardArrayIcon;
             houseCardScore.textContent = sumOfHouseCards;
             console.log("Turn " + houseTurn + ", sum " + sumOfHouseCards + ", The house take a " + houseRandomCardArrayName + ", chose " + aceCardValuesRandomValue + pointOrPoints());
-            setTimeout(displayAlertOut, 4000);
-            setTimeout(finalHouseCheckPoint, 6000);
+            setTimeout(displayAlertOut, 2000);
+            setTimeout(finalHouseCheckPoint, 4000);
         } else {
             //? Suma el valor de la casrta a la suma de las cartas
             houseCardGive.textContent = houseRandomCardArrayIcon;
@@ -1286,60 +1232,40 @@ document.addEventListener("DOMContentLoaded", () => {
                 playerStatus = "Waiting";
                 //?DESPLIEGA LA PANTALLA DE DISPLAY ALERT y le da color
                 displayAlertIn();
-                alertText.style.color = "var(--white)";
-                displayAlert.style.background = "var(--blue)";
                 //?pone mensaje de alerta
                 alertText.textContent = "It's your turn";
-                setTimeout(changeToPlayer, 4000);
+                setTimeout(changeToPlayer, 2000);
                 console.log("Turn " + houseTurn + ",Sum " + sumOfHouseCards + ", The house take a " + houseRandomCardArrayName);
             } else if (sumOfHouseCards === 21 && houseTurn === 2) {
                 //?pone caracteristicas a los jugadores
                 houseStillPlay = false;
                 playerStillPlay = false;
                 houseStatus = "Winer";
-                PlayerStatus = "Loser";
+                playerStatus = "Loser";
                 //? Despliega la pantalla de alerta
                 displayAlertIn();
 
                 //?Quita los botones de Ace en caso de que esten activados y pone los botones de NewGame, giveMe done y LearnMore
-                alertAceBtnsContainer.classList.add("hide_btns");
-                giveMeBtnsContainer.classList.add("hide_btns");
-                alertNewGameBtnsContainer.classList.remove("hide_btns");
+                alertAceBtnsContainer.classList.add("hide");
+                giveMeBtnsContainer.classList.add("hide");
+                alertNewGameBtnsContainer.classList.remove("hide");
                 //?si ganas se dan las caracteristicas diguientes a la pantalla de alerta - alerta ganaste
-                displayAlert.style.background = "var(--red)";
-
-                alertText.style.color = "var(--white";
                 alertText.textContent = "You lose, The House got BlackJack";
-
-                //? console.log(houseStillPlay);
-                //? console.log(houseStatus);
-                //? console.log(playerStillPlay);
-                //? console.log(playerStatus);
-                //? console.log('The house got Blackjack');
             } else if (sumOfHouseCards === 21 && houseStatus !== 2) {
                 //?pone caracteristicas a los jugadores
                 houseStillPlay = false;
                 playerStillPlay = false;
                 houseStatus = "Winer";
-                PlayerStatus = "Loser";
+                playerStatus = "Loser";
                 //? Despliega la pantalla de alerta
                 displayAlertIn();
 
                 //?Quita los botones de Ace en caso de que esten activados y pone los botones de NewGame, giveMe done y LearnMore
-                alertAceBtnsContainer.classList.add("hide_btns");
-                giveMeBtnsContainer.classList.add("hide_btns");
-                alertNewGameBtnsContainer.classList.remove("hide_btns");
+                alertAceBtnsContainer.classList.add("hide");
+                giveMeBtnsContainer.classList.add("hide");
+                alertNewGameBtnsContainer.classList.remove("hide");
                 //?si ganas se dan las caracteristicas diguientes a la pantalla de alerta - alerta ganaste
-                displayAlert.style.background = "var(--red)";
-
-                alertText.style.color = "var(--white";
                 alertText.textContent = "The House got 21";
-
-                //? console.log(houseStillPlay);
-                //? console.log(houseStatus);
-                //? console.log(playerStillPlay);
-                //? console.log(playerStatus);
-                //? console.log('The house got Blackjack');
             } else if (sumOfHouseCards > 21) {
                 //?pone caracteristicas a los jugadores
                 houseStatus = "Loser";
@@ -1352,20 +1278,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 //?Quita los botones de Ace en caso de que esten activados y pone los botones de NewGame, giveMe done y LearnMore
 
-                giveMeBtnsContainer.classList.add("hide_btns");
-                alertAceBtnsContainer.classList.add("hide_btns");
-                alertNewGameBtnsContainer.classList.remove("hide_btns");
+                giveMeBtnsContainer.classList.add("hide");
+                alertAceBtnsContainer.classList.add("hide");
+                alertNewGameBtnsContainer.classList.remove("hide");
 
                 //?si ganas se dan las caracteristicas diguientes a la pantalla de alerta - alerta perdiste
-                displayAlert.style.background = "var(--lightGreen)";
-                alertText.style.color = "var(--white";
                 alertText.textContent = "your a Winer, the house take to much";
-
-                //? console.log(houseStillPlay);
-                //? console.log(houseStatus);
-                //? console.log(playerStillPlay);
-                //? console.log(playerStatus);
-                //? console.log('Your a loser');
             }
         }
     }
@@ -1375,19 +1293,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function doneBtnPlayer() {
         //?da caracteristicas a la ventana de display alerta
-        displayAlert.style.background = "var(--yellow)";
-        alertText.style.color = "var(--black)";
         alertText.textContent = "You are done, no more cards for you";
         //? DA CARACTERISTICAS AL JUGADOR DE QUE NO VA A SEGUIR JUGANDO
         playerStillPlay = false;
         playerStatus = "No more cards";
 
         //?Quita el contenedor de botones giveMeDone
-        giveMeBtnsContainer.classList.add("hide_btns");
+        giveMeBtnsContainer.classList.add("hide");
         //? PONE DISPLAY DE ALERTA CON MENSAJE
         displayAlertIn();
         //? CAMBIA AL TURNO DE LA CASA
-        setTimeout(changeToHouse, 4000);
+        setTimeout(changeToHouse, 2000);
     }
     /*
      *FUCION QUE REVISA EN CASO DE QUE LOS DOS JUGADORES TERMINEN DE TOMAR, DA RESPUESTA DE GANADOR
@@ -1405,67 +1321,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
             //?Quita los botones de Ace en caso de que esten activados y pone los botones de NewGame, giveMe done y LearnMore
 
-            giveMeBtnsContainer.classList.add("hide_btns");
-            alertAceBtnsContainer.classList.add("hide_btns");
-            alertNewGameBtnsContainer.classList.remove("hide_btns");
+            giveMeBtnsContainer.classList.add("hide");
+            alertAceBtnsContainer.classList.add("hide");
+            alertNewGameBtnsContainer.classList.remove("hide");
 
             //?si ganas se dan las caracteristicas diguientes a la pantalla de alerta - alerta perdiste
-            displayAlert.style.background = "var(--lightGreen)";
-            alertText.style.color = "var(--white";
             alertText.textContent = "your a Winer, the house is done and you have better hand";
 
-            //? console.log(houseStillPlay);
-            //? console.log(houseStatus);
-            //? console.log(playerStillPlay);
-            //? console.log(playerStatus);
             console.log("Your a Winer, keep do in it like this");
         } else if (sumOfHouseCards > sumOfPlayerCards) {
             //?pone caracteristicas a los jugadores
 
             playerStillPlay = false;
             houseStatus = "Winer";
-            PlayerStatus = "Loser";
+            playerStatus = "Loser";
             //? Despliega la pantalla de alerta
             displayAlertIn();
 
             //?Quita los botones de Ace en caso de que esten activados y pone los botones de NewGame, giveMe done y LearnMore
-            alertAceBtnsContainer.classList.add("hide_btns");
-            giveMeBtnsContainer.classList.add("hide_btns");
-            alertNewGameBtnsContainer.classList.remove("hide_btns");
+            alertAceBtnsContainer.classList.add("hide");
+            giveMeBtnsContainer.classList.add("hide");
+            alertNewGameBtnsContainer.classList.remove("hide");
             //?si ganas se dan las caracteristicas diguientes a la pantalla de alerta - alerta ganaste
-            displayAlert.style.background = "var(--red)";
-
-            alertText.style.color = "var(--white";
             alertText.textContent = "The House was more smart";
 
-            //? console.log(houseStillPlay);
-            //? console.log(houseStatus);
-            //? console.log(playerStillPlay);
-            //? console.log(playerStatus);
             console.log("The house think his game better, win for points");
         } else if (sumOfHouseCards === sumOfPlayerCards) {
             //?pone caracteristicas a los jugadores
 
             playerStillPlay = false;
             houseStatus = "Winer";
-            PlayerStatus = "Loser";
+            playerStatus = "Loser";
             //? Despliega la pantalla de alerta
             displayAlertIn();
 
             //?Quita los botones de Ace en caso de que esten activados y pone los botones de NewGame, giveMe done y LearnMore
-            alertAceBtnsContainer.classList.add("hide_btns");
-            giveMeBtnsContainer.classList.add("hide_btns");
-            alertNewGameBtnsContainer.classList.remove("hide_btns");
+            alertAceBtnsContainer.classList.add("hide");
+            giveMeBtnsContainer.classList.add("hide");
+            alertNewGameBtnsContainer.classList.remove("hide");
             //?si ganas se dan las caracteristicas diguientes a la pantalla de alerta - alerta ganaste
-            displayAlert.style.background = "var(--red)";
-
-            alertText.style.color = "var(--white";
             alertText.textContent = "Both have the same points, the house wins";
-
-            //? console.log(houseStillPlay);
-            //? console.log(houseStatus);
-            //? console.log(playerStillPlay);
-            //? console.log(playerStatus);
             console.log("Both have the same points, the house wins");
         }
     }
@@ -1520,7 +1415,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 false,
                 false,
                 false,
-                false,
+                true,
                 false,
                 false,
                 false,
@@ -1538,24 +1433,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (decitionsArrayProRandomDecition === true) {
                 //?REINICIA LA PANTALLA DE ALERT DISPLAY
-                displayAlert.style.background = "var(--white)";
                 displayAlertIn();
-                alertText.style.color = "var(--black)";
                 //?Pone textos a la pantalla de alert
                 alertText.textContent = "The house it's taking a card";
 
-                setTimeout(displayAlertOut, 4000);
-                setTimeout(houseTakeACard, 6000);
+                setTimeout(displayAlertOut, 2000);
+                setTimeout(houseTakeACard, 4000);
             } else if (houseStillPlay === false && playerStillPlay === false) {
                 checkForDobleFalse();
             } else if (houseStillPlay === false && playerStillPlay !== false) {
                 //?REINICIA LA PANTALLA DE ALERT DISPLAY
-                displayAlert.style.background = "var(--yellow)";
                 displayAlertIn();
-                alertText.style.color = "var(--black)";
                 //?Pone textos a la pantalla de alert
                 alertText.textContent = "The house it's already done";
-                setTimeout(changeToPlayer, 4000);
+                setTimeout(changeToPlayer, 2000);
             } else if (decitionsArrayProRandomDecition === false) {
                 houseStillPlay = decitionsArrayProRandomDecition;
                 houseStatus = "No more cards";
@@ -1565,11 +1456,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 //?pone el display alert con la desicion de la casa
                 displayAlertIn();
-                displayAlert.style.background = "var(--yellow)";
-                alertText.style.color = "var(--black)";
                 //?Pone textos a la pantalla de alert
                 alertText.textContent = "The house it's no longer in the game";
-                setTimeout(changeToPlayer, 4000);
+                setTimeout(changeToPlayer, 2000);
             }
         }
 
@@ -1612,7 +1501,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 false,
                 false,
                 false,
-                false,
+                true,
                 false,
                 false,
                 false,
@@ -1626,24 +1515,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (decitionsArrayInterRandomDecition === true) {
                 //?REINICIA LA PANTALLA DE ALERT DISPLAY
-                displayAlert.style.background = "var(--white)";
                 displayAlertIn();
-                alertText.style.color = "var(--black)";
                 //?Pone textos a la pantalla de alert
                 alertText.textContent = "The house it's taking a card";
 
-                setTimeout(displayAlertOut, 4000);
-                setTimeout(houseTakeACard, 6000);
+                setTimeout(displayAlertOut, 2000);
+                setTimeout(houseTakeACard, 4000);
             } else if (houseStillPlay === false && playerStillPlay === false) {
                 checkForDobleFalse();
             } else if (houseStillPlay === false && playerStillPlay !== false) {
                 //?REINICIA LA PANTALLA DE ALERT DISPLAY
-                displayAlert.style.background = "var(--yellow)";
                 displayAlertIn();
-                alertText.style.color = "var(--black)";
                 //?Pone textos a la pantalla de alert
                 alertText.textContent = "The house it's already done";
-                setTimeout(changeToPlayer, 4000);
+                setTimeout(changeToPlayer, 2000);
             } else if (decitionsArrayInterRandomDecition === false) {
                 houseStillPlay = decitionsArrayInterRandomDecition;
                 houseStatus = "No more cards";
@@ -1652,11 +1537,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("The house is not take more cards by inter, decition the game house still play " + decitionsArrayInterRandomDecition);
                 //?pone el display alert con la desicion de la casa
                 displayAlertIn();
-                displayAlert.style.background = "var(--yellow)";
-                alertText.style.color = "var(--black)";
                 //?Pone textos a la pantalla de alert
                 alertText.textContent = "The house it's no longer in the game";
-                setTimeout(changeToPlayer, 4000);
+                setTimeout(changeToPlayer, 2000);
             }
         }
 
@@ -1713,24 +1596,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (decitionsArrayBasicRandomDecition === true) {
                 //?REINICIA LA PANTALLA DE ALERT DISPLAY
-                displayAlert.style.background = "var(--white)";
                 displayAlertIn();
-                alertText.style.color = "var(--black)";
                 //?Pone textos a la pantalla de alert
                 alertText.textContent = "The house it's taking a card";
 
-                setTimeout(displayAlertOut, 4000);
-                setTimeout(houseTakeACard, 6000);
+                setTimeout(displayAlertOut, 2000);
+                setTimeout(houseTakeACard, 4000);
             } else if (houseStillPlay === false && playerStillPlay === false) {
                 checkForDobleFalse();
             } else if (houseStillPlay === false && playerStillPlay !== false) {
                 //?REINICIA LA PANTALLA DE ALERT DISPLAY
-                displayAlert.style.background = "var(--yellow)";
                 displayAlertIn();
-                alertText.style.color = "var(--black)";
                 //?Pone textos a la pantalla de alert
                 alertText.textContent = "The house it's already done";
-                setTimeout(changeToPlayer, 4000);
+                setTimeout(changeToPlayer, 2000);
             } else if (decitionsArrayBasicRandomDecition === false) {
                 houseStillPlay = decitionsArrayBasicRandomDecition;
                 houseStatus = "No more cards";
@@ -1740,11 +1619,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 //?pone el display alert con la desicion de la casa
                 displayAlertIn();
-                displayAlert.style.background = "var(--yellow)";
-                alertText.style.color = "var(--black)";
                 //?Pone textos a la pantalla de alert
                 alertText.textContent = "The house it's no longer in the game";
-                setTimeout(changeToPlayer, 4000);
+                setTimeout(changeToPlayer, 2000);
             }
         }
 
@@ -1760,24 +1637,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (decitionsArraySuperBasicRandomDecition === true) {
                 //?REINICIA LA PANTALLA DE ALERT DISPLAY
-                displayAlert.style.background = "var(--white)";
                 displayAlertIn();
-                alertText.style.color = "var(--black)";
                 //?Pone textos a la pantalla de alert
                 alertText.textContent = "The house it's taking a card";
 
-                setTimeout(displayAlertOut, 4000);
-                setTimeout(houseTakeACard, 6000);
+                setTimeout(displayAlertOut, 2000);
+                setTimeout(houseTakeACard, 4000);
             } else if (houseStillPlay === false && playerStillPlay === false) {
                 checkForDobleFalse();
             } else if (houseStillPlay === false && playerStillPlay !== false) {
                 //?REINICIA LA PANTALLA DE ALERT DISPLAY
-                displayAlert.style.background = "var(--yellow)";
                 displayAlertIn();
-                alertText.style.color = "var(--black)";
                 //?Pone textos a la pantalla de alert
                 alertText.textContent = "The house it's already done";
-                setTimeout(changeToPlayer, 4000);
+                setTimeout(changeToPlayer, 2000);
             } else if (decitionsArraySuperBasicRandomDecition === false) {
                 //?pone caracteristicas de jugador
                 houseStillPlay = decitionsArraySuperBasicRandomDecition;
@@ -1787,11 +1660,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("The house is not take more cards by super basic, decition the game house still play " + decitionsArraySuperBasicRandomDecition);
                 //?pone el display alert con la desicion de la casa
                 displayAlertIn();
-                displayAlert.style.background = "var(--yellow)";
-                alertText.style.color = "var(--black)";
                 //?Pone textos a la pantalla de alert
                 alertText.textContent = "The house it's no longer in the game";
-                setTimeout(changeToPlayer, 4000);
+                setTimeout(changeToPlayer, 2000);
             }
         }
 
@@ -1805,13 +1676,11 @@ document.addEventListener("DOMContentLoaded", () => {
             detectionSuperBasic();
         } else if (sumOfHouseCards < 12) {
             //?REINICIA LA PANTALLA DE ALERT DISPLAY
-            displayAlert.style.background = "var(--white)";
             displayAlertIn();
-            alertText.style.color = "var(--black)";
             //?Pone textos a la pantalla de alert
             alertText.textContent = "The house it's taking a card";
-            setTimeout(displayAlertOut, 4000);
-            setTimeout(houseTakeACard, 6000);
+            setTimeout(displayAlertOut, 2000);
+            setTimeout(houseTakeACard, 4000);
         }
     }
 
@@ -1821,29 +1690,25 @@ document.addEventListener("DOMContentLoaded", () => {
     //!
     function changeToHouse() {
         //?Quita el contenedor de botones giveMeDone
-        giveMeBtnsContainer.classList.add("hide_btns");
+        giveMeBtnsContainer.classList.add("hide");
         //?REINICIA LA PANTALLA DE ALERT DISPLAY
-        displayAlert.style.background = "var(--yellow)";
         displayAlertIn();
-        alertText.style.color = "var(--black)";
         //?Pone textos a la pantalla de alert
 
         //?PONE MENSAJE
         alertText.textContent = "Wait for the house play";
 
         if (houseStillPlay === true) {
-            setTimeout(checkForDecition, 3000);
+            setTimeout(checkForDecition, 4000);
         } else if (houseStillPlay === false && playerStillPlay !== false) {
             //?REINICIA LA PANTALLA DE ALERT DISPLAY
             function houseDone() {
-                displayAlert.style.background = "var(--yellow)";
                 displayAlertIn();
-                alertText.style.color = "var(--black)";
                 //?Pone textos a la pantalla de alert
                 alertText.textContent = "The house it's already done";
             }
-            setTimeout(houseDone, 4000);
-            setTimeout(changeToPlayer, 6000);
+            setTimeout(houseDone, 2000);
+            setTimeout(changeToPlayer, 4000);
         } else if (houseStillPlay === false && playerStillPlay === false) {
             checkForDobleFalse();
         }
@@ -1856,7 +1721,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //!!!!!!!!
 
         if (playerStillPlay === true) {
-            giveMeBtnsContainer.classList.remove("hide_btns");
+            giveMeBtnsContainer.classList.remove("hide");
 
             displayAlertOut();
             playerBtnsIn();
@@ -1864,19 +1729,15 @@ document.addEventListener("DOMContentLoaded", () => {
             checkForDobleFalse();
         } else if (playerStillPlay === false && houseStillPlay !== false) {
             //?REINICIA LA PANTALLA DE ALERT DISPLAY
-            displayAlert.style.background = "var(--yellow)";
             displayAlertIn();
-            alertText.style.color = "var(--black)";
             //?Pone textos a la pantalla de alert
             alertText.textContent = "You'r already done";
-            setTimeout(changeToHouse, 4000);
+            setTimeout(changeToHouse, 2000);
         }
     }
     function reStartWhoPlay() {
-        alertNewGameBtnsContainer.classList.add("hide_btns");
-        alertWhoStartBtnsContainer.classList.remove("hide_btns");
-        displayAlert.style.background = "var(--white)";
-        alertText.style.color = "var(--black)";
+        alertNewGameBtnsContainer.classList.add("hide");
+        alertWhoStartBtnsContainer.classList.remove("hide");
         alertText.textContent = "Who starts?";
         console.log("The table it's clear, we start a new game");
         whoStartBtnsIn();

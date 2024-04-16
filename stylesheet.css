@@ -1,11 +1,18 @@
 :root {
-  --bgBodyColor: rgb(26, 32, 29);
-  --outerBoard: rgb(37, 56, 56);
   --board: darkslategray;
-  --display: rgb(35, 35, 35);
-  --turquoise: turquoise;
+  --black: black;
+  --blackMute: rgb(35, 35, 35);
+  --blackT: rgb(0, 0, 0, 0.5);
+  --white: rgb(245, 245, 245);
+  --whiteT: rgb(245, 245, 245, 0.5);
+  --darkShadow: rgba(0, 0, 0, 0.8);
+  --lightShadow: rgba(100, 100, 100, 0.8);
+  --gray: dimgray;
+  --darkGray: rgb(100, 100, 100);
+  --lightGray: rgb(160, 160, 160);
   --lightRed: rgb(255, 0, 43);
   --red: crimson;
+  --redT: rgb(220, 20, 60, 0.5);
   --darkRed: rgb(170, 35, 60);
   --lightYellow: rgb(255, 255, 0);
   --yellow: rgb(185, 185, 19);
@@ -20,19 +27,16 @@
   --lightGreen: rgb(0, 185, 0);
   --green: green;
   --darkGreen: rgb(10, 80, 10);
-  --black: black;
-  --gray: dimgray;
-  --darkGray: rgb(100, 100, 100);
-  --lightGray: rgb(160, 160, 160);
-  --white: whitesmoke;
-  --darkShadow: rgba(0, 0, 0, 0.8);
-  --lightShadow: rgba(100, 100, 100, 0.8);
+  --turquoise: turquoise;
+  font-size: 8px;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-weight: 400;
+  font-family: "Lato", sans-serif;
 }
 
 body {
@@ -42,52 +46,14 @@ body {
   align-items: center;
   min-height: 100svh;
   width: 100%;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  font-size: 10px;
-  background: var(--bgBodyColor);
+  padding: 2rem;
+  background: url("./img/wood.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-body button {
+body BUTTON {
   border: none;
-}
-
-.game_title_container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  background: var(--white);
-  border-radius: 0.5rem;
-  transition: all 0.5s ease-in-out;
-  padding: 0.5rem;
-}
-.game_title_container .games_count_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 0.25rem;
-  background: var(--black);
-  padding: 0.5rem;
-  transition: all 0.5s ease-in-out;
-}
-.game_title_container .games_count_container .score {
-  transition: all 500ms ease;
-  font-size: 1.5rem;
-}
-.game_title_container .games_count_container .lost_score {
-  color: var(--red);
-}
-.game_title_container .games_count_container .win_score {
-  color: var(--greenyellow);
-}
-.game_title_container .games_count_container .count_title {
-  color: var(--white);
-}
-.game_title_container .game_title {
-  font-size: 2.2rem;
-}
-.game_title_container .game_title .red_text_title {
-  color: var(--red);
 }
 
 .board_game_container {
@@ -97,55 +63,100 @@ body button {
   justify-content: center;
   width: 90%;
   max-width: 800px;
+  height: 100%;
   background: var(--lightGray);
-  border-radius: 10px;
+  border-radius: 0.5rem;
   transition: all 0.5s ease-in-out;
   padding: 1rem;
   gap: 1rem;
 }
-.board_game_container .board {
+
+.game_title {
+  display: block;
+  font-size: 2.5rem;
+  width: 100%;
+  border-radius: 0.25rem;
+  background: var(--white);
+  text-align: center;
+  text-transform: uppercase;
+}
+.game_title .red_text_title {
+  color: var(--red);
+}
+
+.board {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 2rem;
   overflow: hidden;
   width: 100%;
   background: var(--board);
-  background: url("./img/wood.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 0.5rem;
   padding: 1rem;
   transition: all 0.5s ease-in-out;
 }
-.board_game_container .board .playerBoard {
+
+.games_count_container {
+  position: absolute;
+  top: 0.5rem;
   display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-.board_game_container .board .playerBoard .turn_container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   border-radius: 0.25rem;
-  padding: 0.25rem;
-  background: var(--black);
+  background: var(--blackT);
+  padding: 0.5rem;
   transition: all 0.5s ease-in-out;
 }
-.board_game_container .board .playerBoard .turn_container .turn_count_title {
-  color: var(--white);
-  font-size: 0.7rem;
-  font-weight: 200;
+.games_count_container .score {
+  transition: all 500ms ease;
+  font-size: 1.5rem;
 }
-.board_game_container .board .playerBoard .turn_container .turn_count {
-  transition: all 0.5s ease-in-out;
+.games_count_container .lost_score {
   color: var(--red);
-  font-size: 1.1rem;
 }
-.board_game_container .board .display_alert {
+.games_count_container .win_score {
+  color: var(--greenyellow);
+}
+.games_count_container .count_title {
+  color: var(--white);
+}
+
+.player_count_container {
+  left: 0.5rem;
+}
+
+.game_count_container {
+  right: 0.5rem;
+}
+
+.playerBoard {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.playerBoard .card_display {
+  max-width: 120px;
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+}
+.playerBoard .card_game_name {
+  margin-top: 0.25rem;
+  color: var(--white);
+  font-size: 1rem;
+}
+
+.display_alert {
   position: absolute;
   top: 1rem;
   left: 1rem;
@@ -157,67 +168,22 @@ body button {
   height: calc(100% - 2rem);
   width: calc(100% - 2rem);
   border-radius: 0.5rem;
-  transition: all 1s ease-in-out;
+  padding: 1rem;
+  transition: background 1s ease-in-out;
+  color: var(--black);
 }
-.board_game_container .board .display_alert .alert_text {
+.display_alert .alert_text {
   text-align: center;
   text-transform: uppercase;
   font-size: 3rem;
-  color: var(--black);
 }
 
-.card_display_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: auto;
-  height: 150px;
-  max-width: 150px;
-  border-radius: 0.5rem;
-  margin-top: 0.5rem;
-}
-.card_display_container IMG {
-  height: 100%;
-  width: auto;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-/*
-?CONTENEDOR DE CARTA
-*/
-.card_display {
-  width: 120px;
-  height: auto;
-  -o-object-fit: cover;
-     object-fit: cover;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 0.5rem;
-  padding: 0.25rem;
-}
-
-/*
-?CONTENEDOR DE TEXTO DE QUE CARTA ES
-*/
-.pick_card_name {
-  font-size: 1rem;
-  color: var(--white);
-  margin-top: 1rem;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
-/*
-*CONTENEDOR DE SCORES DE JUGADORES
-*/
 .cards_scores_container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 70px;
-  width: 240px;
+  max-width: 240px;
+  width: 100%;
   transition: all 0.5s ease-in-out;
   margin-top: 10px;
 }
@@ -226,18 +192,21 @@ body button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 10px;
-  background: var(--white);
+  border-radius: 0.5rem;
+  background: var(--whiteT);
   text-align: center;
   font-size: 1rem;
-  height: 70px;
-  width: 100px;
-  margin: 5px;
+  padding: 0.25rem;
   transition: all 0.5s ease-in-out;
+}
+.container H4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .score-container {
-  background: var(--red);
+  background: var(--redT);
   transition: all 0.5s ease-in-out;
 }
 
@@ -254,16 +223,38 @@ body button {
 }
 
 .general_btns_container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: consolas;
   border-radius: 0.5rem;
-  background: var(--display);
+  background: var(--blackMute);
   width: 100%;
   padding: 0.5rem;
+  overflow: hidden;
 }
-.general_btns_container .btns_container {
+
+.waiting_block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: var(--black);
+  color: var(--white);
+  font-size: 2rem;
+  text-transform: uppercase;
+  z-index: 2;
+}
+.waiting_block p {
+  font-weight: 600;
+}
+
+.btns_container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -273,83 +264,47 @@ body button {
   width: 100%;
   transition: all 1s ease-in-out;
 }
-.general_btns_container .hide_btns {
+
+.hide {
   display: none;
 }
-.general_btns_container .display_btn {
+
+.display_btn {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   text-transform: uppercase;
   color: var(--black);
-  font-size: 1.5rem;
-  padding: 1rem 0;
+  font-size: 1.2rem;
+  padding: 0.5rem;
   border-radius: 0.5rem;
   width: 100%;
 }
 
-#display_ace_11,
-#display_ace_1 {
-  font-size: 2rem;
-}
-
-#display_giveMe_btn:hover,
-#display_newGame_btn:hover,
-#display_start_btn_id:hover {
+.red_btn:hover {
   background: var(--red);
   color: var(--white);
 }
 
-#display_start_random_btn:hover,
-#display_done_btn:hover {
-  background: var(--red);
-  color: var(--white);
-}
-
-#display_start_house_btn:hover,
-#display_learMore_btn:hover {
+.purple_btn:hover {
   background: var(--purple);
   color: var(--white);
 }
 
-#display_start_player_btn:hover,
-#display_ace_11:hover,
-#display_ace_1:hover {
+.blue_btn:hover {
   background: var(--blue);
   color: var(--white);
 }
 
-/*
-?ON CLICK DE BOTONES
-*/
-#display_newGame_btn:active,
-#display_giveMe_btn:active {
-  background: var(--lightGreen);
-}
-
-#display_start_btn_id:active,
-#display_start_random_btn:active,
-#display_done_btn:active {
-  background: var(--lightRed);
-}
-
-#display_start_house_btn:active,
-#display_learMore_btn:active {
-  background: var(--lightPurple);
-}
-
-#display_start_player_btn:active,
-#display_ace_11:active,
-#display_ace_1:active {
-  background: var(--lightBlue);
-}
-
 @media screen and (min-width: 720px) {
-  .card_display_container {
-    height: 250px;
+  :root {
+    font-size: 14px;
   }
-  .board_game_container .board {
-    flex-direction: row;
+  .board {
+    grid-template-columns: 1fr 1fr;
+  }
+  .playerBoard .card_display {
+    max-width: 200px;
   }
 }

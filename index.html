@@ -6,41 +6,31 @@
         <title>BLACKJACK AI GAME</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- !GOOGLE FONT -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet" />
+        <!-- !GOOGLE FONT -->
         <script src="./app.js" charset="utf-8"></script>
-
         <link rel="stylesheet" href="./stylesheet.css" />
     </head>
     <body>
+        <div class="my_banner"></div>
         <div class="board_game_container">
-            <div class="game_title_container">
-                <div class="games_count_container">
+            <h3 class="game_title">Black<span class="red_text_title">Jack</span></h3>
+
+            <div class="board">
+                <div class="games_count_container player_count_container">
                     <h3 class="count_title">Won Games</h3>
                     <p class="score win_score" id="player_win_score_id">0</p>
                 </div>
-                <div class="game_title">
-                    <h3>Black<span class="red_text_title">Jack</span></h3>
-                </div>
-                <div class="games_count_container">
+                <div class="games_count_container game_count_container">
                     <h3 class="count_title">Lost Games</h3>
                     <p class="score lost_score" id="player_lost_score_id">0</p>
                 </div>
-            </div>
-
-            <div class="board">
                 <div class="playerBoard board_player">
-                    <div class="turn_container" id="turn_count_container">
-                        <!--!PLAYER TURN COUNT TITLE-->
-                        <h4 class="turn_count_title">Turn</h4>
-
-                        <!--!PLAYER TURN COUNT COUNT-->
-                        <p><span class="turn_count" id="player_turn_count">0</span></p>
-                    </div>
-                    <div class="card_display_container card_display_container_player">
-                        <img src="./img/deck/blank.png" class="card_display" id="card_player_display_id" />
-                    </div>
-                    <div class="pick_card_name">
-                        <h4 class="card_game_name" id="player_card_game_name">Name of the Card</h4>
-                    </div>
+                    <img src="./img/deck/blank.png" class="card_display" id="card_player_display_id" />
+                    <h4 class="card_game_name" id="player_card_game_name">Name of the Card</h4>
                     <div class="cards_scores_container">
                         <!--!PLAYER CARD GIVEN-->
                         <div class="container" id="card_give_container">
@@ -65,21 +55,9 @@
                     </div>
                 </div>
                 <div class="playerBoard board_house">
-                    <!--!HOUSE TURN COUNT CONTAINER-->
-                    <div class="turn_container" id="house_turn_count_container">
-                        <!--!HOUSE TURN COUNT TITLE-->
-                        <h4 class="turn_count_title">Turn</h4>
-                        <!--!HOUSE TURN COUNT COUNT-->
-                        <p><span class="turn_count" id="house_turn_count">0</span></p>
-                    </div>
-                    <!--!house card container-->
-                    <div class="card_display_container card_display_container_house">
-                        <img src="./img/deck/blank_House.png" class="card_display" id="card_house_display_id" />
-                    </div>
+                    <img src="./img/deck/blank_House.png" class="card_display" id="card_house_display_id" />
                     <!--!HOUSE NAME OF THE CARDS-->
-                    <div class="pick_card_name">
-                        <h4 class="card_game_name" id="house_card_game_name">Name of the Card</h4>
-                    </div>
+                    <h4 class="card_game_name" id="house_card_game_name">Name of the Card</h4>
                     <!--!HOUSE CARD GIVEN AND SCORE CONTAINERS-->
                     <div class="cards_scores_container">
                         <div class="container" id="house_card_give_container">
@@ -101,43 +79,46 @@
                 </div>
             </div>
             <div class="general_btns_container" id="general_display_btns_id">
+                <div class="waiting_block hide">
+                    <p>Waiting</p>
+                </div>
                 <div class="btns_container" id="alert_start_btn_container">
-                    <button type="button" class="display_btn" id="display_start_btn_id">
+                    <button type="button" class="red_btn display_btn" id="display_start_btn_id">
                         <span class="label_btn">start</span>
                     </button>
                 </div>
-                <div class="btns_container hide_btns" id="alert_who_start_btns_container">
-                    <button type="button" class="display_btn" id="display_start_player_btn">
+                <div class="btns_container hide" id="alert_who_start_btns_container">
+                    <button type="button" class="blue_btn display_btn" id="display_start_player_btn">
                         <span class="label_btn">Player</span>
                     </button>
-                    <button type="button" class="display_btn" id="display_start_house_btn">
+                    <button type="button" class="purple_btn display_btn" id="display_start_house_btn">
                         <span class="label_btn">House</span>
                     </button>
-                    <button type="button" class="display_btn" id="display_start_random_btn">
+                    <button type="button" class="red_btn display_btn" id="display_start_random_btn">
                         <span class="label_btn">Random</span>
                     </button>
                 </div>
-                <div class="btns_container hide_btns" id="alert_giveMe_done_btns_container">
-                    <button type="button" class="display_btn" id="display_giveMe_btn">
+                <div class="btns_container hide" id="alert_giveMe_done_btns_container">
+                    <button type="button" class="red_btn display_btn" id="display_giveMe_btn">
                         <span class="label_btn">give me</span>
                     </button>
-                    <button type="button" class="display_btn" id="display_done_btn">
+                    <button type="button" class="red_btn display_btn" id="display_done_btn">
                         <span class="label_btn">done</span>
                     </button>
                 </div>
-                <div class="btns_container hide_btns" id="alert_newGame_btns_container">
-                    <button type="button" class="display_btn" id="display_newGame_btn">
+                <div class="btns_container hide" id="alert_newGame_btns_container">
+                    <button type="button" class="red_btn display_btn" id="display_newGame_btn">
                         <span class="label_btn">new game</span>
                     </button>
-                    <button type="button" class="display_btn" id="display_learMore_btn">
+                    <button type="button" class="purple_btn display_btn" id="display_learMore_btn">
                         <span class="label_btn">learn more</span>
                     </button>
                 </div>
-                <div class="btns_container hide_btns" id="alert_ace_btns_container">
-                    <button type="button" class="display_btn" id="display_ace_1">
+                <div class="btns_container hide" id="alert_ace_btns_container">
+                    <button type="button" class="blue_btn display_btn" id="display_ace_1">
                         <span class="label_btn">1</span>
                     </button>
-                    <button type="button" class="display_btn" id="display_ace_11">
+                    <button type="button" class="blue_btn display_btn" id="display_ace_11">
                         <span class="label_btn">11</span>
                     </button>
                 </div>
